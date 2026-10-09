@@ -1,0 +1,176 @@
+sys
+name = CG
+gmx_path = gmx
+input_dir = /path/to/project/input
+output_dir = /path/to/project/FAST_NATC/1N
+forcefield = /path/to/project/input/charmm36-jul2021.ff
+idxGRPS = BIL:['NATC','POPC'] SOLV:['SOL','NA'] MM:['NATC','POPC']
+boxSize = 12 12 12
+boxDist = 14
+Wradius = 0.21
+US = /path/to/previous_runs/FAST_NATC_PL/Run1/
+cg2at = CG
+resolvate = True
+end
+
+molecule_1
+system = CG
+name = NATC
+nmol = 15
+insertion_radius = 1.0
+insert = False
+packmol = False
+CGAT = False
+itp = True
+end
+
+molecule_2
+system = CG
+name = POPC
+nmol = 10
+insertion_radius = 0.25
+insert = False
+packmol = False
+CGAT = False
+itp = True
+end
+
+molecule_3
+system = CG
+name = NA
+nmol = 15
+insertion_radius = 0.25
+insert = True
+packmol = False
+CGAT = True
+itp = False
+replace = None
+end
+
+molecule_4
+system = CG
+name = SOL
+nmol = 0
+insertion_radius = 0.105
+insert = False
+CGAT = False
+packmol = False
+itp = False
+end
+
+sys
+name = AA
+gmx_path = gmx
+input_dir = /path/to/project/input
+output_dir = /path/to/project/FAST_NATC/1N
+forcefield = /path/to/project/input/charmm36-jul2021.ff
+idxGRPS = BIL:['NATC','POPC'] SOLV:['Water','NA','CLA'] MM:['NATC','POPC','Protein','DPHE','THO','DTRP']
+boxSize = 12 12 12
+boxDist = 0
+Wradius = 0.21
+US = None
+cg2at = AA
+resolvate = False
+end
+
+molecule_1
+system = AA
+name = NATC
+nmol = 15
+insertion_radius = 1.0
+insert = False
+packmol = False
+CGAT = AA
+itp = True
+end
+
+molecule_2
+system = AA
+name = POPC
+nmol = 10
+insertion_radius = 0.25
+insert = False
+packmol = False
+CGAT = AA
+itp = True
+end
+
+molecule_3
+system = AA
+name = NA
+nmol = 0
+insertion_radius = 0.105
+insert = False
+packmol = False
+CGAT = AA
+itp = False
+end
+
+molecule_4
+system = AA
+name = SOL
+nmol = 0
+insertion_radius = 0.105
+insert = False
+packmol = False
+CGAT = AA
+itp = False
+end
+
+molecule_5
+system = AA
+name = CLA
+nmol = 0
+insertion_radius = 0.25
+insert = False
+packmol = False
+CGAT = AA
+itp = False
+replace = Water
+end
+
+molecule_6
+system = AA
+name = OCT
+nmol = 6
+insertion_radius = 0.25
+insert = True
+packmol = False
+CGAT = AA
+itp = True
+replace = SOL
+end
+
+stage
+system = AA
+type = EM_AA
+end
+
+stage
+system = AA
+type = NVT_AA
+ref_t = 298.15 298.15
+tc-grps = MM SOLV
+gen_temp = 298.15
+end
+
+stage
+system = AA
+type = NPT_AA
+tc-grps = MM SOLV
+ref_t = 298.15 298.15
+end
+
+stage
+system = AA
+type = MD_AA
+tc-grps = MM SOLV
+ref_t = 298.15 298.15
+end
+
+slurm
+cpu_partition = cpu
+gpu_partition = gpu
+mail_user = you@example.org
+gmxrc = /opt/gromacs/bin/GMXRC
+end

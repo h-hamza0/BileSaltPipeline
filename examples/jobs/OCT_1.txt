@@ -1,0 +1,87 @@
+sys
+name = AA
+gmx_path = gmx
+input_dir = /path/to/project/input
+output_dir = /path/to/project/OCT/1
+forcefield = /path/to/project/input/charmm36-jul2021.ff
+idxGRPS = SOLV:['Water','CLA'] MM:['Protein','DPHE','THO','DTRP']
+boxSize = 12 12 12
+boxDist = 0
+Wradius = 0.21
+US = None
+cg2at = AA
+resolvate = True
+end
+
+molecule_1
+system = AA
+name = OCT
+nmol = 1
+insertion_radius = 0.25
+insert = True
+packmol = False
+CGAT = AA
+itp = True
+replace = SOL
+end
+
+molecule_2
+system = AA
+name = SOL
+nmol = 0
+insertion_radius = 0.105
+insert = False
+packmol = False
+CGAT = AA
+itp = False
+end
+
+molecule_3
+system = AA
+name = NA
+nmol = 0
+insertion_radius = 0.105
+insert = False
+packmol = False
+CGAT = AA
+itp = False
+end
+
+molecule_4
+system = AA
+name = CLA
+nmol = 0
+insertion_radius = 0.25
+insert = False
+packmol = False
+CGAT = AA
+itp = False
+replace = SOL
+end
+
+stage
+system = AA
+type = EM_AA
+end
+
+stage
+system = AA
+type = NVT_AA
+ref_t = 298 298
+tc-grps = MM SOLV
+gen_temp = 298
+end
+
+stage
+system = AA
+type = NPT_AA
+tc-grps = MM SOLV
+ref_t = 298 298
+end
+
+stage
+system = AA
+type = MD_AA
+tc-grps = MM SOLV
+ref_t = 298 298
+end

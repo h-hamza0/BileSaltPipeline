@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.venv/
+.DS_Store
+output_*.log
+mdout.mdp
+\#*#
+*.tpr
+*.trr
+*.edr
+demo_run/

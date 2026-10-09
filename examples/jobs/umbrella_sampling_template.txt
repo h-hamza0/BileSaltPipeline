@@ -1,0 +1,104 @@
+sys
+name = AA
+gmx_path = gmx
+input_dir = /path/to/project/input
+output_dir = /path/to/project/US_run
+forcefield = /path/to/project/input/charmm36-jul2021.ff
+idxGRPS = MM:['NATC','POPC'] SOLV:['Water','NA','CLA'] OCT:['OCT']
+boxSize = 12 12 12
+boxDist = 14
+Wradius = 0.21
+US = /path/to/previous_runs/FAST_NATC/1N
+cg2at = AA
+resolvate = True
+end
+
+molecule_1
+system = AA
+name = NATC
+nmol = 15
+insertion_radius = 1.0
+itp = True
+end
+
+molecule_2
+system = AA
+name = POPC
+nmol = 10
+insertion_radius = 0.25
+itp = True
+end
+
+molecule_3
+system = AA
+name = OCT
+nmol = 1
+insertion_radius = 0.25
+itp = True
+end
+
+molecule_4
+system = AA
+name = SOL
+nmol = 0
+insertion_radius = 0.105
+end
+
+molecule_5
+system = AA
+name = NA
+nmol = 0
+insertion_radius = 0.105
+end
+
+molecule_6
+system = AA
+name = CLA
+nmol = 0
+insertion_radius = 0.25
+end
+
+stage
+system = AA
+type = EM_AA
+end
+
+stage
+system = AA
+type = PULL
+end
+
+stage
+system = AA
+type = CONFIG
+US = True
+lipid = MM
+drug = OCT
+end
+
+stage
+system = AA
+type = EM_US
+US = True
+end
+
+stage
+system = AA
+type = PULL_EQUIL
+US = True
+end
+
+stage
+system = AA
+type = PULL_US
+US = True
+end
+
+slurm
+cpu_partition = cpu
+gpu_partition = gpu
+mail_user = you@example.org
+gmxrc = /opt/gromacs/bin/GMXRC
+umbrella_jobs = 15
+frame_jobs = 5
+end

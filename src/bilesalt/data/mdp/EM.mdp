@@ -1,0 +1,24 @@
+define                   = -DFLEXIBLE -DPOSRES -DPOSRESD
+integrator               = steep
+nsteps                   = 500000
+nstxout                  = 1000
+nstfout                  = 0
+nstlog                   = 100 
+emtol = 500
+
+cutoff-scheme            = Verlet
+nstlist                  = 15
+ns_type                  = grid
+pbc                      = xyz
+verlet-buffer-tolerance  = -1
+rlist = 1.1
+
+coulombtype              = reaction-field 
+rcoulomb                 = 1.1
+epsilon_r                = 15    
+epsilon_rf               = 0
+vdw_type                 = cutoff  
+vdw-modifier             = Potential-shift-verlet
+rvdw                     = 1.1
+periodic-molecules = no
+constraints = none

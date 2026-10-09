@@ -1,0 +1,46 @@
+;define                   = -DFLEXIBLE
+title                    = Martini_NPT_01
+integrator               = md
+dt                       = 0.02 
+nsteps                   = 500000
+nstcomm                  = 100
+
+nstxout                  = 0
+nstvout                  = 0
+nstfout                  = 0
+nstlog                   = 10000 
+nstenergy                = 100   
+nstxtcout                = 1000  
+xtc_precision            = 100
+
+cutoff-scheme            = Verlet
+nstlist                  = 20
+ns_type                  = grid
+pbc                      = xyz
+verlet-buffer-tolerance  = 0.005
+
+coulombtype              = reaction-field
+rcoulomb                 = 1.1
+epsilon_r                = 15	
+epsilon_rf               = 0 
+vdw-modifier             = Potential-shift-verlet 
+vdw_type                 = cutoff
+rvdw                     = 1.1 
+
+tcoupl                   = v-rescale 
+tc-grps                  = LIPD W
+tau_t                    = 1.0  1.0 
+ref_t                    = 298  298 
+Pcoupl                   = Berendsen
+Pcoupltype               = isotropic
+tau_p                    = 12.0  
+compressibility          = 3e-4
+ref_p                    = 1.0 
+
+gen_vel                  = no
+
+constraints              = none 
+constraint_algorithm     = Lincs
+continuation             = yes
+lincs_order              = 6
+lincs_warnangle          = 30

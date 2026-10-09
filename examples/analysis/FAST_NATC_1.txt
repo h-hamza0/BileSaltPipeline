@@ -1,0 +1,28 @@
+system
+resultFolder = /path/to/project/FAST_NATC/1
+end
+
+stage_1
+name = EM_AA
+analysis = potential
+end
+
+stage_2
+name = NVT_AA
+analysis = temperature
+end
+
+stage_3
+name = NPT_AA
+analysis = pressure
+end
+
+stage_4
+name = MD_AA
+analysis = HBA_RES
+extractLargest = 25
+clusOverTime = CMPL CMPL
+prettyView = CMPL OCT MM
+convertTpr = non-Water
+cleanUp = CMPL 5
+end

@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bilesalt"
+dynamic = ["version"]
+description = "Automated GROMACS pipeline for coarse-grained to atomistic (backmapped) bile-salt/peptide simulations, umbrella sampling and logP free-energy analysis"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Hamza Habib" }]
+keywords = ["molecular dynamics", "GROMACS", "backmapping", "cg2at", "umbrella sampling", "bile salts"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Chemistry",
+    "License :: OSI Approved :: MIT License",
+]
+dependencies = ["numpy", "MDAnalysis>=2.4"]
+
+[project.optional-dependencies]
+analysis = ["scipy", "pandas", "matplotlib", "mdakit-sasa"]
+dev = ["pytest", "ruff"]
+
+[project.scripts]
+bilesalt = "bilesalt.cli:main"
+
+[tool.setuptools.dynamic]
+version = { attr = "bilesalt._version.__version__" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+bilesalt = ["data/mdp/*.mdp"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["gromacs: requires a working gmx executable"]
+
+[tool.ruff]
+line-length = 110
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "W"]
+ignore = ["E741"]
