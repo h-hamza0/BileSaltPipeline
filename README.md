@@ -52,7 +52,7 @@ Requirements: Python ≥ 3.9, [GROMACS](https://www.gromacs.org) on `PATH` (test
 backmapping `cg2at` (`conda install -c conda-forge cg2at` or from its repository).
 
 ```bash
-git clone <this repository> && cd BileSaltPipelineCode
+git clone https://github.com/h-hamza0/BileSaltPipeline.git && cd BileSaltPipeline
 pip install -e ".[analysis]"      # add ,dev for pytest and ruff
 bilesalt --version
 ```
